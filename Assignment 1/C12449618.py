@@ -2,11 +2,15 @@
 """
 Created on Fri Feb 12 17:45:54 2016
 
-@author: Toast3y
+@author: Christopher Jerrard-Dunne
+Student Number: C12449618
+Email: C12449618@mydit.ie
+
+@version: 1.0
+
 """
 
 import pandas as pd
-import matplotlib as mpl
 from collections import Counter
 import numpy as np
 import csv
