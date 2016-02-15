@@ -18,9 +18,9 @@ import sys
 
 
 
-contDataHeader = ["Feature", "Count", "% Miss.", "Card.", "Min.", "1st Qrt.", 
+contDataHeader = ["FEATURENAME", "Count", "% Miss.", "Card.", "Min.", "1st Qrt.", 
                   "Mean", "Median", "3rd Qrt.", "Max.", "Std. Dev."]
-cateDataHeader = ["Feature", "Count", "% Miss.", "Card.", "Mode", "Mode Freq.",
+cateDataHeader = ["FEATURENAME", "Count", "% Miss.", "Card.", "Mode", "Mode Freq.",
                   "Mode %", "2nd Mode", "2nd Mode Freq.", "2nd Mode %"]
 
 
