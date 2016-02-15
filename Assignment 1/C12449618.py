@@ -164,24 +164,25 @@ for feature in cateDataFeature:
 
 #Create the files and output them into the correct folder
 #Continuous Data File
-try:
-    newfile = open('./data/C12449618CONT.csv', 'w')
-    writerObject = csv.writer(newfile, lineterminator='\n')
+newfile = open('./data/C12449618CONT.csv', 'w')
+writerObject = csv.writer(newfile, lineterminator='\n')
     
-    #Write each line into the new file
-    for line in contData:
-        writerObject.writerow(line)
-except:
-    print('ERROR: Unable to write C12449618CONT.csv file.')
+#Write each line into the new file
+for line in contData:
+    writerObject.writerow(line)
+        
+newfile.flush()
+newfile.close()
 
     
 #Categorical Data File
-try:
-    newfile2 = open('./data/C12449618CATE.csv', 'w')
-    writerObject2 = csv.writer(newfile2, lineterminator='\n')
+newfile2 = open('./data/C12449618CATE.csv', 'w')
+writerObject2 = csv.writer(newfile2, lineterminator='\n')
     
-    #Write each line into the new file
-    for line in cateData:
-        writerObject2.writerow(line)
-except:
-    print('ERROR: Unable to write C12449618CONT.csv file.')
+#Write each line into the new file
+for line in cateData:
+    writerObject2.writerow(line)
+        
+newfile2.flush()
+newfile2.close()
+
