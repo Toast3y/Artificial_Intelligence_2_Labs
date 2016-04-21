@@ -14,7 +14,7 @@ import sys
 
 def main():
     
-    if(len(sys.argv != 3)):
+    if len(sys.argv) != 3:
         print("Usage: python filename [training_set] [queries]")
     
     print("Hello World")
