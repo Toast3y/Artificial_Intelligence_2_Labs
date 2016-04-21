@@ -54,13 +54,24 @@ def main():
     
     
     
-    ##   
+    ##Continuous Relevant Data: age, balance, previous
+    ##Categorical Relevant Data: job, housing, loan, contact
     ##
     ##INSERT CODE THAT DOES THINGS HERE
-    ##
-    ##
+    ##Implement Random Forest predictive algorithm
+    ##Format data into numerical format
+    
+    relevantFeatures = ["age","balance","previous","job","housing","loan","contact"]
+    
+    model = rfc(n_estimators=1000)
+    x_trainer = trainingSet[relevantFeatures].values 
+    y_trainer = trainingSet["y"].values
     
     
+    
+    #convert 
+    
+    model.fit(x_trainer, y_trainer)
     
     
     
