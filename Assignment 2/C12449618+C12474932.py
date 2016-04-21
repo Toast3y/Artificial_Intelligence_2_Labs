@@ -10,7 +10,7 @@ Created on Mon Apr 11 20:11:02 2016
 """
 
 import sys
-import pandas as pd
+#import pandas as pd
 
 def main():
     
@@ -19,3 +19,6 @@ def main():
     
     print("Hello World")
     
+
+if __name__ == '__main__':
+    main()
