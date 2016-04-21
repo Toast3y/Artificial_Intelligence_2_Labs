@@ -22,6 +22,7 @@ def main():
     queries_dir = ""
     
     features = ["ID","age","job","marital","education","default","balance","housing","loan","contact","day","month","duration","campaign","pdays","previous","poutcome","y"]
+    dataHeader = ["ID","Y"]
     idnum = [0]
     target = [17]
     cont = [1, 5, 6, 10, 12, 13, 14, 15]
@@ -51,6 +52,8 @@ def main():
     
     
     
+    
+    
     ##   
     ##
     ##INSERT CODE THAT DOES THINGS HERE
@@ -58,6 +61,20 @@ def main():
     ##
     
     
+    
+    
+    
+    #Format the data and put it into a list to write to file.
+    answerData.append(dataHeader)
+    length = len(trainingSet.index)
+
+    for x in range (0, length):
+        temp = []
+        newid = trainingSet.iloc[x]['ID']
+        temp.append(newid)
+        newtarget = trainingSet.iloc[x]['y']
+        temp.append(newtarget)
+        answerData.append(temp)
     
     #Write all the data from the array into a text file.
     #Each iteration of queries should be written into the answerData list, as lists themselves.
