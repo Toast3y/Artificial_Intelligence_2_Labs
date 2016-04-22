@@ -59,7 +59,7 @@ def main():
     
     relevantFeatures = ["age","balance","previous","job","housing","loan","contact"]
     
-    #model = rfc(n_estimators=1000)
+    
     
     trainingSet = numerify(trainingSet)
     queries = numerify(queries)
@@ -80,19 +80,22 @@ def main():
             
     for x in range (0, len(trainingSet.index)):
         y_trainer.set_value(x, 'y', trainingSet.iloc[x]['y'])
-            
-    print(x_trainer)
-    print(x_queries)
         
     
-    
-    #y_trainer = trainingSet["y"].values
-    
-    #model.fit(trainingSet, y_trainer)
+    ##Create the random forest model
+    model = rfc(n_estimators=1000)
 
+
+    #Fit the values into the model.
+    y_train = y_trainer["y"].values
+    model.fit(x_trainer, y_train)
     
-    #model.fit(, y_trainer)
-    
+
+    #
+    #
+    #DO MORE CODE HERE, QUERY OUR MODEL, RETRIEVE ANSWERS FOR QUERIES, APPEND IT TO answerData
+    #
+    #
     
     
     #Format the data and put it into a list to write to file.
