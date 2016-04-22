@@ -23,10 +23,6 @@ def main():
     
     features = ["ID","age","job","marital","education","default","balance","housing","loan","contact","day","month","duration","campaign","pdays","previous","poutcome","y"]
     dataHeader = ["ID","Y"]
-    idnum = [0]
-    target = [17]
-    cont = [1, 5, 6, 10, 12, 13, 14, 15]
-    cat = [2, 3, 4, 7, 8, 9, 11, 16]
     answerData = []
     
     #Find the datasets in the Data folder.
@@ -63,15 +59,39 @@ def main():
     
     relevantFeatures = ["age","balance","previous","job","housing","loan","contact"]
     
-    model = rfc(n_estimators=1000)
-    x_trainer = trainingSet[relevantFeatures].values 
-    y_trainer = trainingSet["y"].values
+    #model = rfc(n_estimators=1000)
+    
+    trainingSet = numerify(trainingSet)
+    queries = numerify(queries)
+    print("Finished formatting")
+    
+    #Create new dataframes, place data inside them
+    x_trainer = pd.DataFrame(index = trainingSet.index, columns = relevantFeatures)
+    y_trainer = pd.DataFrame(index = trainingSet.index, columns = ['y'])
+    
+    x_queries = pd.DataFrame(index = trainingSet.index, columns = relevantFeatures)
+    
+    for types in relevantFeatures:
+        for x in range(0, len(trainingSet.index)):
+            x_trainer.set_value(x, types, trainingSet.iloc[x][types])
+            
+        for x in range(0, len(queries.index)):
+            x_queries.set_value(x, types, queries.iloc[x][types])
+            
+    for x in range (0, len(trainingSet.index)):
+        y_trainer.set_value(x, 'y', trainingSet.iloc[x]['y'])
+            
+    print(x_trainer)
+    print(x_queries)
+        
     
     
+    #y_trainer = trainingSet["y"].values
     
-    #convert 
+    #model.fit(trainingSet, y_trainer)
+
     
-    model.fit(x_trainer, y_trainer)
+    #model.fit(, y_trainer)
     
     
     
@@ -99,5 +119,65 @@ def main():
     newfile.close()
     
 
+    
+#Methods to parse relevant data
+def job_to_numeric(x):
+    if x == 'unknown':
+        return 0
+    else:
+        y = x[6:]
+        return int(y)
+        
+#convert housing to numeric
+def houseLoan_to_numeric(x):
+    if x == 'yes':
+        return 0
+    if x == 'no':
+        return 1
+        
+#convert loan to numeric
+#see above
+#convert contact to numeric
+def contact_to_numeric(x):
+    if x == 'unknown':
+        return 0
+    if x == 'telephone':
+        return 1
+    if x == 'cellular':
+        return 2
+    
+def y_to_numeric(x):
+    if x == 'TypeA':
+        return 0
+    if x == 'TypeB':
+        return 1
+
+
+def numerify(data):
+    #made all data numeric
+    length = len(data.index)
+    print(length)
+    
+    for x in range (0, length):
+        newjob = job_to_numeric(data.iloc[x]['job'])
+        data.set_value(x, 'job', newjob)
+        
+        newhouse = houseLoan_to_numeric(data.iloc[x]['housing'])
+        data.set_value(x, 'housing', newhouse)
+        
+        newloan = houseLoan_to_numeric(data.iloc[x]['loan'])
+        data.set_value(x, 'loan', newloan)
+        
+        newcontact = contact_to_numeric(data.iloc[x]['contact'])
+        data.set_value(x, 'contact', newcontact)
+        
+        if data.iloc[x]['y'] != '?':
+            newy = y_to_numeric(data.iloc[x]['y'])
+            data.set_value(x, 'y', newy)
+        
+    return data
+
+
 if __name__ == '__main__':
     main()
+    
