@@ -69,7 +69,7 @@ def main():
     x_trainer = pd.DataFrame(index = trainingSet.index, columns = relevantFeatures)
     y_trainer = pd.DataFrame(index = trainingSet.index, columns = ['y'])
     
-    x_queries = pd.DataFrame(index = trainingSet.index, columns = relevantFeatures)
+    x_queries = pd.DataFrame(index = queries.index, columns = relevantFeatures)
     
     for types in relevantFeatures:
         for x in range(0, len(trainingSet.index)):
