@@ -91,16 +91,16 @@ def main():
     model.fit(x_trainer, y_train)
     
 
-    #
-    #
-    #DO MORE CODE HERE, QUERY OUR MODEL, RETRIEVE ANSWERS FOR QUERIES, APPEND IT TO answerData
-    #
-    #
+    #Query our model, and retrieve our answers to queries.
+    output = model.predict(x_queries)
+    print("Model queried, writing results to file.")
+    
+
     
     
     #Format the data and put it into a list to write to file.
     answerData.append(dataHeader)
-    length = len(trainingSet.index)
+    length = len(x_queries.index)
 
     for x in range (0, length):
         temp = []
