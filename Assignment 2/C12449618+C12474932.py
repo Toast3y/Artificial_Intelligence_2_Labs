@@ -11,7 +11,6 @@ Created on Mon Apr 11 20:11:02 2016
 
 import sys
 import pandas as pd
-import numpy as np
 import csv
 #import random
 from sklearn.ensemble import RandomForestClassifier as rfc
@@ -47,23 +46,18 @@ def main():
         sys.exit()
     
     
+    print("Found data, formatting now...")
     
     
-    
-    ##Continuous Relevant Data: age, balance, previous
-    ##Categorical Relevant Data: job, housing, loan, contact
-    ##
-    ##INSERT CODE THAT DOES THINGS HERE
-    ##Implement Random Forest predictive algorithm
-    ##Format data into numerical format
-    
+    #The data was analyzed using a data quality report generator created in Assignment 1
+    #On analysis of the data, we chose these features to fit the random forest against.
+    #Other features were either too broad (too many unique results), or too narrow (populated mainly by one result with ~70-90% chance)
     relevantFeatures = ["age","balance","previous","job","housing","loan","contact"]
     
     
     
     trainingSet = numerify(trainingSet)
     queries = numerify(queries)
-    print("Finished formatting")
     
     #Create new dataframes, place data inside them
     x_trainer = pd.DataFrame(index = trainingSet.index, columns = relevantFeatures)
@@ -81,6 +75,7 @@ def main():
     for x in range (0, len(trainingSet.index)):
         y_trainer.set_value(x, 'y', trainingSet.iloc[x]['y'])
         
+    print("Finished formatting. Populating forest...")
     
     ##Create the random forest model
     model = rfc(n_estimators=1000)
@@ -89,7 +84,7 @@ def main():
     #Fit the values into the model.
     y_train = y_trainer["y"].values
     model.fit(x_trainer, y_train)
-    
+    print("Created random forest, querying...")
 
     #Query our model, and retrieve our answers to queries.
     output = model.predict(x_queries)
@@ -104,9 +99,14 @@ def main():
 
     for x in range (0, length):
         temp = []
-        newid = trainingSet.iloc[x]['ID']
+        newid = queries.iloc[x]['ID']
         temp.append(newid)
-        newtarget = trainingSet.iloc[x]['y']
+
+        if output[x] == 1:
+            newtarget = "TypeB"
+        else:
+            newtarget = "TypeA"
+        
         temp.append(newtarget)
         answerData.append(temp)
     
@@ -159,7 +159,6 @@ def y_to_numeric(x):
 def numerify(data):
     #made all data numeric
     length = len(data.index)
-    print(length)
     
     for x in range (0, length):
         newjob = job_to_numeric(data.iloc[x]['job'])
